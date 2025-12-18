@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна №7 — jQuery UI</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .block {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #slider {
+            width: 300px;
+            margin: 20px 0;
+        }
+
+        #gallery img {
+            width: 100px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>jQuery UI — Демонстрація</h1>
+
+<!-- Слайдер -->
+<div class="block">
+    <h2>Слайдер</h2>
+    <div id="slider"></div>
+    <p>Значення: <span id="value">50</span></p>
+</div>
+
+<!-- Випадне меню (Accordion) -->
+<div class="block">
+    <h2>Випадне меню</h2>
+    <div id="accordion">
+        <h3>Розділ 1</h3>
+        <div><p>Контент першого розділу</p></div>
+
+        <h3>Розділ 2</h3>
+        <div><p>Контент другого розділу</p></div>
+
+        <h3>Розділ 3</h3>
+        <div><p>Контент третього розділу</p></div>
+    </div>
+</div>
+
+<!-- Галерея (Dialog) -->
+<div class="block">
+    <h2>Галерея</h2>
+    <div id="gallery">
+        <img src="https://picsum.photos/200?1">
+        <img src="https://picsum.photos/200?2">
+        <img src="https://picsum.photos/200?3">
+    </div>
+</div>
+
+<div id="dialog" title="Зображення">
+    <img id="dialog-img" src="" width="100%">
+</div>
+
+<script>
+    $(function () {
+
+        $("#slider").slider({
+            min: 0,
+            max: 100,
+            value: 50,
+            slide: function (event, ui) {
+                $("#value").text(ui.value);
+            }
+        });
+
+        $("#accordion").accordion({
+            heightStyle: "content"
+        });
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 300
+        });
+
+        $("#gallery img").click(function () {
+            $("#dialog-img").attr("src", $(this).attr("src"));
+            $("#dialog").dialog("open");
+        });
+
+    });
+</script>
+
+</body>
+</html>
